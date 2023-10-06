@@ -1,7 +1,6 @@
 import Queue from 'bull';
 import { ObjectID } from 'mongodb';
-
-const sha1 = require('sha1');
+import sha1 from 'sha1';
 
 const RedisClient = require('../utils/redis');
 const DBClient = require('../utils/db');
@@ -16,10 +15,12 @@ class UsersController {
       // Check if email and password are provided
       if (!email) {
         res.status(400).json({ error: 'Missing email' });
+        return;
       }
 
       if (!password) {
         res.status(400).json({ error: 'Missing password' });
+        return;
       }
 
       // Check if the email already exists in the database
